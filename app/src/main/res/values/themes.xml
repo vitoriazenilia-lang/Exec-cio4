@@ -1,11 +1,19 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Themes.Task" parent="Base.Theme.Task" />
+
     <style name="Base.Theme.Task" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your Light theme here. -->
         <item name="colorPrimary">@color/color_default</item>
-        <!-- <item name="colorPrimaryVariant">@color/color_default</item> -->
         <item name="android:windowBackground">@color/color_default</item>
     </style>
 
-    <style name="Theme.Task" parent="Base.Theme.Task"/>
+    <style name="CustomTablLayout" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyRadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/green</item>
+    </style>
 </resources>

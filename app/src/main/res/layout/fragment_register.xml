@@ -20,6 +20,7 @@
         android:paddingTop="40dp">
 
         <TextView
+            android:textSize="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Criar Conta"
@@ -37,6 +38,7 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="25dp">
             <TextView
+                android:textSize="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="E-mail"
@@ -50,6 +52,7 @@
                 android:layout_marginTop="4dp"
                 android:background="@drawable/bg_edit_text"/>
             <TextView
+                android:textSize="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Senha"
@@ -69,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Enviar"
+                android:textSize="18dp"
                 android:textColor="@color/color_default"
                 app:backgroundTint="@null"
                 android:background="@drawable/bg_btn"
