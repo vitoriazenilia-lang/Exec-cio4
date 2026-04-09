@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.vitoria.task.ui.R
 import com.vitoria.task.ui.databinding.FragmentRecoverAccountBinding
 import com.vitoria.task.ui.ui.initToolbar
+import com.vitoria.task.ui.ui.showBottomSheet
 
 
 class RecoverAccountFragment : Fragment() {
@@ -38,7 +39,7 @@ class RecoverAccountFragment : Fragment() {
         if (email.isNotBlank()){
             Toast.makeText(requireContext(),"Tudo OK!", Toast.LENGTH_SHORT).show()
         }else{
-            Toast.makeText(requireContext(),"Preencha um email válido!", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.email_empty)
 
         }
     }

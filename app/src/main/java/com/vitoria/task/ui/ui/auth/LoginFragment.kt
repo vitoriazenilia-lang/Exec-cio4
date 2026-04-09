@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.vitoria.task.ui.R
 import com.vitoria.task.ui.databinding.FragmentLoginBinding
 import com.vitoria.task.ui.databinding.FragmentRegisterBinding
+import com.vitoria.task.ui.ui.showBottomSheet
 
 class LoginFragment : Fragment() {
 
@@ -47,10 +48,10 @@ class LoginFragment : Fragment() {
             if (senha.isNotBlank()){
                 findNavController().navigate(R.id.action_global_homeFragment)
             }else{
-                Toast.makeText(requireContext(),"Preencha a senha!", Toast.LENGTH_SHORT)
+                showBottomSheet(message = R.string.password_empty)
             }
         }else{
-            Toast.makeText(requireContext(),"Preencha seu email!", Toast.LENGTH_SHORT)
+            showBottomSheet(message = R.string.email_empty)
 
         }
     }
