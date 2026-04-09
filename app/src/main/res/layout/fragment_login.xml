@@ -34,6 +34,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:id="@+id/editTextEmail"
             android:hint="Digite seu e-mail"
             android:inputType="textEmailAddress"
             android:padding="10dp"
@@ -51,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:inputType="textPassword"
+            android:id="@+id/editTextPassword"
             android:hint="Digite sua senha"
             android:padding="10dp"
             android:layout_marginTop="4dp"

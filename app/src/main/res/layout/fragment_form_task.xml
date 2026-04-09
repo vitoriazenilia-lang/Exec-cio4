@@ -5,6 +5,28 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.FormTaskFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            app:navigationIcon="@drawable/ic_back"
+            android:paddingTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nova tarefa"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"/>
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </LinearLayout>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -50,6 +72,7 @@
             android:buttonTint="@color/black"
             android:id="@+id/rbTodo"
             android:text="A Fazer"
+            android:checked="true"
             android:theme="@style/MyRadioButton"
             android:textColor="@color/white"/>
         <RadioButton

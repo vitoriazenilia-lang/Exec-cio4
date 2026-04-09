@@ -16,6 +16,7 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
         app:navigationIcon="@drawable/ic_back"
         android:paddingTop="40dp">
 
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Criar Conta"
+            android:paddingTop="20dp"
             android:textColor="@color/white"
             android:layout_gravity="center_horizontal"/>
     </com.google.android.material.appbar.MaterialToolbar>
@@ -47,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="Digite seu e-mail"
+                android:id="@+id/editTextEmail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:layout_marginTop="4dp"
@@ -62,6 +65,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:id="@+id/editTextPassword"
                 android:inputType="textPassword"
                 android:hint="Digite sua senha"
                 android:padding="10dp"
@@ -71,6 +75,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/buttonRegister"
                 android:text="Enviar"
                 android:textSize="18dp"
                 android:textColor="@color/color_default"

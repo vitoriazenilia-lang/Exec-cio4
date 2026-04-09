@@ -16,6 +16,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
             app:navigationIcon="@drawable/ic_back"
             android:paddingTop="40dp">
 
@@ -56,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="Digite seu e-mail"
+                android:id="@+id/editTextEmail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:layout_marginTop="4dp"
@@ -63,6 +65,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/buttonEnviar"
                 android:textSize="18dp"
                 android:text="Enviar"
                 android:textColor="@color/color_default"
