@@ -11,11 +11,15 @@
     <string name="hint_edit_password">Digite sua senha</string>
     <!--Generics-->
     <string name="text_title_warning">Atenção</string>
+    <string name="text_name">Vitória Teodoro Nunes</string>
     <string name="text_button_warning">Entendi</string>
     <string name="password_empty">Preencha a senha!</string>
     <string name="password_text">Senha!</string>
     <string name="email_empty">Preencha seu email!</string>
     <string name="email_text">E-mail</string>
+    <string name="description_logout">Logout</string>
+    <string name="content_description_tabs">Tabs</string>
+    <string name="tex_add_task">Add task</string>
 
     <!--Login Fragment-->
     <string name="text_title_login_fragment">Login</string>

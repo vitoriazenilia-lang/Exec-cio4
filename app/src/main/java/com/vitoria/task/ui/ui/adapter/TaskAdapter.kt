@@ -54,10 +54,15 @@ class TaskAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val task = getItem(position)
         holder.binding.textDescription.text = task.description
-        setindicators(task, holder)
+        setIndicators(task, holder)
     }
 
-    private fun setindicators(task: Task, holder: MyViewHolder){
+    private fun setIndicators(task: Task, holder: MyViewHolder){
+        holder.binding.buttonBack.isVisible = true
+        holder.binding.buttonForward.isVisible = true
+        holder.binding.buttonBack.clearColorFilter()
+        holder.binding.buttonForward.clearColorFilter()
+
         when (task.status){
             Status.TODO ->{
                 holder.binding.buttonBack.isVisible = false
@@ -65,6 +70,7 @@ class TaskAdapter(
             }
 
             Status.DOING ->{
+                holder.binding.buttonBack.isVisible = true
                 holder.binding.buttonBack.setColorFilter(ContextCompat.getColor(context, R.color.color_status_todo))
                 holder.binding.buttonForward.setColorFilter(ContextCompat.getColor(context, R.color.color_status_done))
                 holder.binding.buttonForward.setOnClickListener { taskSelected(task, SELECT_NEXT) }
