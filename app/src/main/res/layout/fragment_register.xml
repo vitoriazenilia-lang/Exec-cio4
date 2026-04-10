@@ -24,7 +24,7 @@
             android:textSize="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Criar Conta"
+            android:text="@string/text_title_toolbar_register_fragment"
             android:paddingTop="20dp"
             android:textColor="@color/white"
             android:layout_gravity="center_horizontal"/>
@@ -43,12 +43,12 @@
                 android:textSize="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="E-mail"
+                android:text="@string/email_text"
                 android:textColor="@color/white"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="Digite seu e-mail"
+                android:hint="@string/hint_edit_email"
                 android:id="@+id/editTextEmail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
@@ -58,7 +58,7 @@
                 android:textSize="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Senha"
+                android:text="@string/password_text"
                 android:textColor="@color/white"
                 android:layout_marginTop="16dp"/>
 
@@ -67,7 +67,7 @@
                 android:layout_height="48dp"
                 android:id="@+id/editTextPassword"
                 android:inputType="textPassword"
-                android:hint="Digite sua senha"
+                android:hint="@string/hint_edit_password"
                 android:padding="10dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/bg_edit_text"/>
@@ -76,11 +76,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonRegister"
-                android:text="Enviar"
+                android:text="@string/text_button_register_fragment"
                 android:textSize="18dp"
-                android:textColor="@color/color_default"
-                app:backgroundTint="@null"
-                android:background="@drawable/bg_btn"
+                style="@style/ButtonTheme"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
