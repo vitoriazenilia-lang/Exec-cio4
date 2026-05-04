@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "421675425054",
+    "project_id": "kanban-5521e",
+    "storage_bucket": "kanban-5521e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421675425054:android:7d53236dc55c14a2a3bd0f",
+        "android_client_info": {
+          "package_name": "com.vitoria.task.ui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw4TGUus0qHJbOguMGmaQrzi_D9EW1myA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
