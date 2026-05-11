@@ -10,8 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.vitoria.task.ui.R
 import com.vitoria.task.ui.databinding.FragmentLoginBinding
-import com.vitoria.task.ui.databinding.FragmentRegisterBinding
-import com.vitoria.task.ui.ui.showBottomSheet
+import com.vitoria.task.ui.util.showBottomSheet
 
 class LoginFragment : Fragment() {
 

@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.vitoria.task.ui.R
 import com.vitoria.task.ui.databinding.FragmentRecoverAccountBinding
-import com.vitoria.task.ui.ui.initToolbar
-import com.vitoria.task.ui.ui.showBottomSheet
+import com.vitoria.task.ui.util.initToolbar
+import com.vitoria.task.ui.util.showBottomSheet
 
 
 class RecoverAccountFragment : Fragment() {

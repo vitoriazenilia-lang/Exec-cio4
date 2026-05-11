@@ -1,4 +1,4 @@
-package com.vitoria.task.ui.ui
+package com.vitoria.task.ui.util
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
