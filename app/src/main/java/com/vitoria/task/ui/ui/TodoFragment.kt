@@ -88,6 +88,8 @@ class TodoFragment : Fragment() {
             }
 
             TaskAdapter.SELECT_NEXT -> {
+                task.status = Status.DOING
+                updateTask(task)
                 Toast.makeText(requireContext(), "Próximo", Toast.LENGTH_SHORT).show()
             }
         }
@@ -106,7 +108,7 @@ class TodoFragment : Fragment() {
     private fun deleteTask( task: Task){
         FirebaseHelper.getDatabase()
             .child("task")
-            .child(FirebaseHelper.getIdUSer()
+            .child(FirebaseHelper.getIdUSer())
             .child(task.id)
             .removeValue().addOnCompleteListener { result ->
                 if (result.isSuccessful){
