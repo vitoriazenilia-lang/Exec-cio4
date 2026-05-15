@@ -48,12 +48,14 @@
     <string name="text_button_recover_account_fragment">Enviar</string>
 
     <!--Form Task Fragment-->
-    <string name="description_empty_form_task_fragment">Preencha uma descrição!</string>
+    <string name="text_list_task_empty">Nenhuma tarefa cadastrada!</string>
     <string name="hint_new_task_empty_form_task_fragment">Informe sua nova tarefa</string>
     <string name="new_task_empty_form_task_fragment">Nova tarefa</string>
     <string name="view_status_empty_form_task_fragment">Status</string>
     <string name="text_button_empty_form_task_fragment">Status</string>
-    <string name="text_save_sucess_form_task_fragment">Salvo com sucesso!</string>
+    <!--Form Task-->
+    <string name="description_empty_form_task_fragment">Preencha uma descrição!</string>
+    <string name="text_save_sucess_form_task_fragment">Tarefa salva com sucesso!</string>
 
 
 
