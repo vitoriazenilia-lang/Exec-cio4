@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,8 +33,9 @@ class DoingFragment : Fragment() {
     private lateinit var taskAdapter: TaskAdapter
     private var _binding: FragmentDoingBinding? = null
     private val binding get() = _binding!!
-    private lateinit var reference: DatabaseReference
-    private lateinit var auth: FirebaseAuth
+
+
+    private val viewModel: TaskViewModel by activityViewModels()
 
     fun getIdUSer() = getAuth().currentUser?.uid ?: ""
 
@@ -49,16 +51,16 @@ class DoingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerViewTask()
+        observerViewModel()
         getTask()
-        reference = Firebase.database.reference
-        auth = Firebase.auth
+
 
     }
 
-    private fun observerViewMode(){
+    private fun observerViewModel(){
         viewModel.taskUpdate.observe(viewLifecycleOwner){updateTask ->
             if (updateTask.status == Status.DOING){
-                val oldList = TaskAdapter.currentList
+                val oldList = taskAdapter.currentList
 
                 val newList = oldList.toMutableList().apply {
                     find{ it.id == updateTask.id}?.description = updateTask.description
@@ -97,7 +99,7 @@ class DoingFragment : Fragment() {
             }
 
             TaskAdapter.SELECT_EDIT -> {
-                val action = HomeFragmentDirections.action_homeFragment_to_formTaskFragment(task)
+                val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(task)
                 findNavController().navigate(action)
             }
 
@@ -116,20 +118,23 @@ class DoingFragment : Fragment() {
     }
 
     private fun getTask() {
-        reference
+        FirebaseHelper.getDatabase()
             .child("tasks")
-            .child(auth.currentUser?.uid ?: "")
+            .child(FirebaseHelper.getIdUSer())
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
                     val taskList=mutableListOf<Task>()
 
                     for (ds in p0.children){
                         val task = ds.getValue(Task::class.java) as Task
-                        if (task.status == Status.DOING)
+                        if (task.status == Status.DOING){
                             taskList.add(task)
+                        }
+
                     }
                     binding.progressBar.isVisible=false
                     listEmpty(taskList)
+                    taskList.reverse()
                     taskAdapter.submitList(taskList)
                 }
 

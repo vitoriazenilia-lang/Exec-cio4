@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.Firebase
@@ -18,6 +19,8 @@ import com.vitoria.task.ui.R
 import com.vitoria.task.ui.data.model.Status
 import com.vitoria.task.ui.data.model.Task
 import com.vitoria.task.ui.databinding.FragmentFormTaskBinding
+import com.vitoria.task.ui.util.FirebaseHelper
+import com.vitoria.task.ui.util.hideKeyboard
 import com.vitoria.task.ui.util.initToolbar
 import com.vitoria.task.ui.util.showBottomSheet
 import kotlin.getValue
@@ -33,9 +36,9 @@ class FormTaskFragment : Fragment() {
 
     private var status: Status =Status.TODO
 
-    private lateinit var reference: DatabaseReference
+    private val viewModel: TaskViewModel by activityViewModels()
 
-    private lateinit var auth: FirebaseAuth
+
     private val args: FormTaskFragment by navArgs()
 
 
@@ -50,8 +53,9 @@ class FormTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(binding.toolbar)
-        reference = Firebase.database.reference
-        auth = Firebase.auth
+
+
+
         initListener()
         getArgs()
     }
@@ -80,8 +84,9 @@ class FormTaskFragment : Fragment() {
     }
 
     private fun initListener(){
-        binding.buttonSave.setOnClickListener{
-            validateData()
+        binding.floatingActionButton.setOnClickListener{
+            val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
+            findNavController().navigate(action)
         }
 
         binding.radioGroup.setOnCheckedChangeListener { _, id -> status =
@@ -98,10 +103,14 @@ class FormTaskFragment : Fragment() {
         val description = binding.editTextDescricao.text.toString().trim()
 
         if (description.isNotBlank()){
+            hideKeyboard()
             binding.progressBar.isVisible = true
 
-            if(newTask) task = Task()
-            task.id = reference.push().key ?: ""
+            if(newTask) {
+                task = Task()
+
+            }
+
             task.description = description
             task.status = status
 
@@ -114,9 +123,17 @@ class FormTaskFragment : Fragment() {
     }
 
     private fun saveTask(){
-        reference
+        val userId = FirebaseHelper.getIdUSer()
+        if (userId == null){
+            showBottomSheet(message = getString(R.string.error_generic))
+            return
+        }
+
+        binding.progressBar.isVisible = true
+
+        FirebaseHelper.getDatabase()
             .child("task")
-            .child(auth.currentUser?.uid ?: "")
+            .child(userId)
             .child(task.id)
             .setValue(task).addOnCompleteListener { result ->
                 if(result.isSuccessful){
@@ -128,6 +145,12 @@ class FormTaskFragment : Fragment() {
                     if (newTask){
                         findNavController().popBackStack()
                     }else{
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.text_update_sucess_form_task_fragment,
+                            Toast.LENGTH_SHORT).show()
+
+                        viewModel.setUpdateTask(task)
                         binding.progressBar.isVisible = false
                     }
                 }else{

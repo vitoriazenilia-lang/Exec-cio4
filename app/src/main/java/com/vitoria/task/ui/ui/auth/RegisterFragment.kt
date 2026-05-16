@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.vitoria.task.ui.R
 import com.vitoria.task.ui.databinding.FragmentRegisterBinding
+import com.vitoria.task.ui.util.FirebaseHelper
+import com.vitoria.task.ui.util.hideKeyboard
 import com.vitoria.task.ui.util.initToolbar
 import com.vitoria.task.ui.util.showBottomSheet
 
@@ -47,6 +49,8 @@ class RegisterFragment : Fragment() {
         val senha = binding.editTextPassword.text.toString().trim()
         if (email.isNotBlank()){
             if (senha.isNotBlank()){
+                hideKeyboard()
+
                 binding.progressBar.isVisible = true
                 registerUser(email, senha)
             }else{
@@ -68,7 +72,7 @@ class RegisterFragment : Fragment() {
                         findNavController().navigate(R.id.action_global_homeFragment)
                     }else{
                         binding.progressBar.isVisible = false
-                        Toast.makeText(requireContext(),task.exception?.message, Toast.LENGTH_SHORT).show()
+                        showBottomSheet(message = getString(FirebaseHelper.validError(task.exception?.message.toString())))
                     }
 
                 }

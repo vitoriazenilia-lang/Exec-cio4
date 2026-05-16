@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
@@ -25,6 +26,7 @@ import com.vitoria.task.ui.ui.adapter.TaskAdapter
 import com.vitoria.task.ui.util.FirebaseHelper
 import com.vitoria.task.ui.util.FirebaseHelper.Companion.getAuth
 import com.vitoria.task.ui.util.showBottomSheet
+import kotlin.getValue
 
 
 class TodoFragment : Fragment() {
@@ -33,10 +35,10 @@ class TodoFragment : Fragment() {
 
     private lateinit var taskAdapter: TaskAdapter
 
-    private lateinit var reference: DatabaseReference
-    private lateinit var auth: FirebaseAuth
 
-    fun getIdUSer() = getAuth().currentUser?.uid ?: ""
+    private val viewModel: TaskViewModel by activityViewModels()
+
+
 
 
     override fun onCreateView(
@@ -51,8 +53,6 @@ class TodoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        reference = Firebase.database.reference
-        auth = Firebase.auth
 
         initListeners()
         initRecyclerViewTask()
@@ -60,8 +60,28 @@ class TodoFragment : Fragment() {
 
     }
     private fun initListeners(){
-        binding.floatingActionButton2.setOnClickListener {
-            findNavController().navigate((R.id.action_homeFragment_to_formTaskFragment))
+        binding.floatingActionButton.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
+            findNavController().navigate(action)
+        }
+
+        observerViewModel()
+    }
+    private fun observerViewModel(){
+        viewModel.taskUpdate.observe(viewLifecycleOwner){updateTask ->
+            if (updateTask.status == Status.TODO){
+                val oldList = taskAdapter.currentList
+
+                val newList = oldList.toMutableList().apply {
+                    find{ it.id == updateTask.id}?.description = updateTask.description
+                }
+
+                val position = newList.indexOfFirst { it.id == updateTask.id}
+
+                taskAdapter.submitList(newList)
+
+                taskAdapter.notifyItemChanged(position)
+            }
         }
     }
     private fun initRecyclerViewTask() {
@@ -106,9 +126,9 @@ class TodoFragment : Fragment() {
         }
     }
     private fun getTask() {
-        reference
+        FirebaseHelper.getDatabase()
             .child("tasks")
-            .child(auth.currentUser?.uid ?: "")
+            .child(FirebaseHelper.getIdUSer())
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
                     val taskList=mutableListOf<Task>()
@@ -142,7 +162,7 @@ class TodoFragment : Fragment() {
 
     }
     private fun deleteTask( task: Task){
-        reference
+        FirebaseHelper.getDatabase()
             .child("task")
             .child(FirebaseHelper.getIdUSer())
             .child(task.id)
