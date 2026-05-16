@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
@@ -23,6 +24,7 @@ import com.vitoria.task.ui.databinding.FragmentTodoBinding
 import com.vitoria.task.ui.ui.adapter.TaskAdapter
 import com.vitoria.task.ui.util.FirebaseHelper
 import com.vitoria.task.ui.util.FirebaseHelper.Companion.getAuth
+import com.vitoria.task.ui.util.showBottomSheet
 
 
 class TodoFragment : Fragment() {
@@ -79,7 +81,13 @@ class TodoFragment : Fragment() {
         when (option) {
 
             TaskAdapter.SELECT_REMOVER -> {
-                Toast.makeText(requireContext(), "Removendo ${task.description}", Toast.LENGTH_SHORT).show()
+                showBottomSheet(titleDialog = R.string.text_title_dialog_delete,
+                    message = getString(R.string.text_message_dialog_delete),
+                    titleButton = R.string.text_button_dialog_confirm,
+                    onClick = {
+                        deleteTask(task)
+                    }
+                )
             }
 
             TaskAdapter.SELECT_EDIT -> {
@@ -107,8 +115,14 @@ class TodoFragment : Fragment() {
 
                     for (ds in p0.children){
                         val task = ds.getValue(Task::class.java) as Task
-                        taskList.add(task)
+                        if (task.status == Status.TODO){
+                            taskList.add(task)
+                        }
+
                     }
+                    binding.progressBar.isVisible=false
+                    listEmpty(taskList)
+                    taskList.reverse()
                     taskAdapter.submitList(taskList)
                 }
 
@@ -118,8 +132,17 @@ class TodoFragment : Fragment() {
 
             })
     }
+
+    private fun listEmpty(taskList: List<Task>){
+        binding.textInfo.text = if (taskList.isEmpty()){
+            getString(R.string.text_list_task_empty)
+        }else{
+            ""
+        }
+
+    }
     private fun deleteTask( task: Task){
-        FirebaseHelper.getDatabase()
+        reference
             .child("task")
             .child(FirebaseHelper.getIdUSer())
             .child(task.id)

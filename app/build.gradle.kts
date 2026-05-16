@@ -10,6 +10,8 @@ android {
     namespace = "com.vitoria.task.ui"
     compileSdk = 36
 
+
+
     defaultConfig {
         applicationId = "com.vitoria.task.ui"
         minSdk = 24

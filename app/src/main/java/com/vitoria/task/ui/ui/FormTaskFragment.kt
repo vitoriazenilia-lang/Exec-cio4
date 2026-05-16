@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -19,6 +20,7 @@ import com.vitoria.task.ui.data.model.Task
 import com.vitoria.task.ui.databinding.FragmentFormTaskBinding
 import com.vitoria.task.ui.util.initToolbar
 import com.vitoria.task.ui.util.showBottomSheet
+import kotlin.getValue
 
 
 class FormTaskFragment : Fragment() {
@@ -34,6 +36,8 @@ class FormTaskFragment : Fragment() {
     private lateinit var reference: DatabaseReference
 
     private lateinit var auth: FirebaseAuth
+    private val args: FormTaskFragment by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +53,32 @@ class FormTaskFragment : Fragment() {
         reference = Firebase.database.reference
         auth = Firebase.auth
         initListener()
+        getArgs()
     }
+    private fun getArgs(){
+        args.task.let {
+            if (it != null){
+                this.task = it
+            }
+        }
+    }
+    private fun configTasks(){
+        newTask = false
+        status = task.status
+        binding.textToolbar.setText(R.string.text_toolbar_update_form_task_fragment)
+        binding.editTextDescricao.setText(task.description)
+        setStatus()
+    }
+
+    private fun setStatus(){
+        val id = when (task.status){
+            Status.TODO -> R.id.rbTodo
+            Status.DOING -> R.id.rbDoing
+            else -> R.id.rbDone
+        }
+        binding.radioGroup.check(id)
+    }
+
     private fun initListener(){
         binding.buttonSave.setOnClickListener{
             validateData()
