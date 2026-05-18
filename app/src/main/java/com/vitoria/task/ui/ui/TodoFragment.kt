@@ -10,23 +10,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.database
 import com.vitoria.task.ui.R
 import com.vitoria.task.ui.data.model.Status
 import com.vitoria.task.ui.data.model.Task
 import com.vitoria.task.ui.databinding.FragmentTodoBinding
 import com.vitoria.task.ui.ui.adapter.TaskAdapter
 import com.vitoria.task.ui.util.FirebaseHelper
-import com.vitoria.task.ui.util.FirebaseHelper.Companion.getAuth
 import com.vitoria.task.ui.util.showBottomSheet
 import kotlin.getValue
+import androidx.navigation.findNavController
 
 
 class TodoFragment : Fragment() {
@@ -111,7 +106,8 @@ class TodoFragment : Fragment() {
             }
 
             TaskAdapter.SELECT_EDIT -> {
-                Toast.makeText(requireContext(), "Editando ${task.description}", Toast.LENGTH_SHORT).show()
+                val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(task)
+                requireActivity().findNavController(R.id.nav_host_fragment).navigate(action) // ✅
             }
 
             TaskAdapter.SELECT_DETAILS -> {

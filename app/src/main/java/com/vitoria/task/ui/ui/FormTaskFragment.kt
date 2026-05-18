@@ -39,7 +39,7 @@ class FormTaskFragment : Fragment() {
     private val viewModel: TaskViewModel by activityViewModels()
 
 
-    private val args: FormTaskFragment by navArgs()
+    private val args: FormTaskFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -63,6 +63,7 @@ class FormTaskFragment : Fragment() {
         args.task.let {
             if (it != null){
                 this.task = it
+                configTasks()
             }
         }
     }
@@ -84,18 +85,16 @@ class FormTaskFragment : Fragment() {
     }
 
     private fun initListener(){
-        binding.floatingActionButton.setOnClickListener{
-            val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
-            findNavController().navigate(action)
+        binding.buttonSave.setOnClickListener{
+            validateData()
         }
 
-        binding.radioGroup.setOnCheckedChangeListener { _, id -> status =
-            when(id){
-                R.id.rbTodo ->Status.TODO
-                R.id.rbTodo ->Status.DOING
+        binding.radioGroup.setOnCheckedChangeListener { _, id ->
+            status = when(id){
+                R.id.rbTodo -> Status.TODO
+                R.id.rbDoing -> Status.DOING
                 else -> Status.DONE
             }
-
         }
     }
 
@@ -132,7 +131,7 @@ class FormTaskFragment : Fragment() {
         binding.progressBar.isVisible = true
 
         FirebaseHelper.getDatabase()
-            .child("task")
+            .child("tasks")
             .child(userId)
             .child(task.id)
             .setValue(task).addOnCompleteListener { result ->
@@ -152,10 +151,12 @@ class FormTaskFragment : Fragment() {
 
                         viewModel.setUpdateTask(task)
                         binding.progressBar.isVisible = false
+                        findNavController().popBackStack()
                     }
                 }else{
                     binding.progressBar.isVisible = false
                     showBottomSheet(message = getString(R.string.error_generic))
+
                 }
 
             }

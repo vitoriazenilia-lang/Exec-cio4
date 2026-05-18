@@ -62,7 +62,7 @@
         tools:layout="@layout/fragment_form_task">
         <argument
             android:name="task"
-            app:argType="com.vitoria.task.ui.model.Task"
+            app:argType="com.vitoria.task.ui.data.model.Task"
             app:nullable="true"
             android:defaultValue="@null"/>
     </fragment>

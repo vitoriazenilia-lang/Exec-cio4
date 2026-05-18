@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,11 +21,6 @@ import com.vitoria.task.ui.databinding.FragmentDoneBinding
 import com.vitoria.task.ui.ui.adapter.TaskAdapter
 import com.vitoria.task.ui.util.FirebaseHelper
 import com.vitoria.task.ui.util.FirebaseHelper.Companion.getAuth
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.database
 import com.vitoria.task.ui.util.showBottomSheet
 import kotlin.getValue
 
@@ -36,8 +30,6 @@ class DoneFragment : Fragment() {
     private var _binding: FragmentDoneBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var reference: DatabaseReference
-    private lateinit var auth: FirebaseAuth
 
     fun getIdUSer() = getAuth().currentUser?.uid ?: ""
     private val viewModel: TaskViewModel by activityViewModels()

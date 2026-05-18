@@ -10,6 +10,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.vitoria.task.ui.R
 import com.vitoria.task.ui.databinding.FragmentHomeBinding
 import com.vitoria.task.ui.ui.adapter.ViewPagerAdapter
+import androidx.navigation.fragment.findNavController
+import com.vitoria.task.ui.util.FirebaseHelper
 
 class HomeFragment : Fragment() {
 
@@ -28,8 +30,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         iniTabs()
+        initListeners()
     }
-
+    private fun initListeners() {
+        binding.btnLogout.setOnClickListener {
+            FirebaseHelper.getAuth().signOut()
+            findNavController().navigate(R.id.loginFragment) // ✅
+        }
+    }
 
     private fun iniTabs() {
         val pageAdapter = ViewPagerAdapter(requireActivity())

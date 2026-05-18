@@ -9,7 +9,7 @@ class FirebaseHelper {
 
     companion object{
 
-        fun getDatabase () = Firebase.database.reference
+        fun getDatabase() = Firebase.database("https://kanban-5521e-default-rtdb.firebaseio.com").reference
 
         fun getAuth () = FirebaseAuth.getInstance()
 

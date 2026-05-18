@@ -54,7 +54,7 @@
     <string name="hint_new_task_empty_form_task_fragment">Informe sua nova tarefa</string>
     <string name="new_task_empty_form_task_fragment">Nova tarefa</string>
     <string name="view_status_empty_form_task_fragment">Status</string>
-    <string name="text_button_empty_form_task_fragment">Status</string>
+    <string name="text_button_empty_form_task_fragment">Salvar</string>
 
     <!--Form Task-->
     <string name="description_empty_form_task_fragment">Preencha uma descrição!</string>
@@ -63,9 +63,9 @@
     <string name="text_update_sucess_form_task_fragment">Tarefa atualizada com sucesso!</string>
 
     <!--I don't know where is it (pag 129 kanban)-->
-    <string name="text_title_dialog_delete">********</string>
-    <string name="text_message_dialog_delete">*****</string>
-    <string name="text_button_dialog_confirm">*******</string>
+    <string name="text_title_dialog_delete">Excluir tarefa</string>
+    <string name="text_message_dialog_delete">Tem certeza que deseja excluir a ação não pode ser desfeita?</string>
+    <string name="text_button_dialog_confirm">Confirmar</string>
 
 
 
