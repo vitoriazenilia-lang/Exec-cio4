@@ -148,7 +148,7 @@ class DoneFragment : Fragment() {
     }
     private fun updateTask(task: Task){
         FirebaseHelper.getDatabase()
-            .child("task")
+            .child("tasks")
             .child(FirebaseHelper.getIdUSer())
             .child(task.id)
             .setValue(task).addOnCompleteListener { result ->
