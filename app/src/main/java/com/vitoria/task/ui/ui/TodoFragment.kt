@@ -159,7 +159,7 @@ class TodoFragment : Fragment() {
     }
     private fun deleteTask( task: Task){
         FirebaseHelper.getDatabase()
-            .child("task")
+            .child("tasks")
             .child(FirebaseHelper.getIdUSer())
             .child(task.id)
             .removeValue().addOnCompleteListener { result ->
@@ -178,7 +178,7 @@ class TodoFragment : Fragment() {
 
     private fun updateTask(task: Task){
         FirebaseHelper.getDatabase()
-            .child("task")
+            .child("tasks")
             .child(FirebaseHelper.getIdUSer())
             .child(task.id)
             .setValue(task).addOnCompleteListener { result ->

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
@@ -96,7 +97,8 @@ class DoneFragment : Fragment() {
 
             TaskAdapter.SELECT_EDIT -> {
                 val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(task)
-                findNavController().navigate(action)            }
+                requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)
+            }
 
             TaskAdapter.SELECT_DETAILS -> {
                 Toast.makeText(requireContext(), "Detalhes ${task.description}", Toast.LENGTH_SHORT).show()

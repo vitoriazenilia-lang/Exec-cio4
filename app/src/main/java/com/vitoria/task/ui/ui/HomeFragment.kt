@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     private fun initListeners() {
         binding.btnLogout.setOnClickListener {
             FirebaseHelper.getAuth().signOut()
-            findNavController().navigate(R.id.loginFragment) // ✅
+            findNavController().navigate(R.id.action_global_loginFragment)
         }
     }
 

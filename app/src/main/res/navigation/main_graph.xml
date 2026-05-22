@@ -5,6 +5,12 @@
     android:id="@+id/main_graph"
     app:startDestination="@id/splashFragment">
 
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/authentication"
+        app:popUpTo="@id/main_graph"
+        app:popUpToInclusive="true"/>
+
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.vitoria.task.ui.ui.SplashFragment"

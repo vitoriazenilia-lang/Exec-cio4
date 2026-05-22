@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
@@ -100,7 +101,8 @@ class DoingFragment : Fragment() {
 
             TaskAdapter.SELECT_EDIT -> {
                 val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(task)
-                findNavController().navigate(action)
+                requireActivity().findNavController(R.id.nav_host_fragment).navigate(action)
+
             }
 
             TaskAdapter.SELECT_DETAILS -> {
@@ -113,6 +115,7 @@ class DoingFragment : Fragment() {
             }
             TaskAdapter.SELECT_BACK -> {
                 task.status = Status.TODO
+                updateTask(task)
             }
         }
     }
@@ -155,7 +158,7 @@ class DoingFragment : Fragment() {
     }
     private fun updateTask(task: Task){
         FirebaseHelper.getDatabase()
-            .child("task")
+            .child("tasks")
             .child(FirebaseHelper.getIdUSer())
             .child(task.id)
             .setValue(task).addOnCompleteListener { result ->
@@ -170,7 +173,7 @@ class DoingFragment : Fragment() {
     }
     private fun deleteTask( task: Task){
         FirebaseHelper.getDatabase()
-            .child("task")
+            .child("tasks")
             .child(FirebaseHelper.getIdUSer())
             .child(task.id)
             .removeValue().addOnCompleteListener { result ->
